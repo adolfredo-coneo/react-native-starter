@@ -1,41 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import React, { useEffect, useReducer, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 
 import ColorAdjuster from '../components/ColorAdjuster';
 
+const COLOR_INC_DEC = 10;
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'change_Red':
+      if (state.red + action.payload > 255 || state.red + action.payload < 0)
+        return state;
+      return { ...state, red: state.red + action.payload };
+    case 'change_Green':
+      if (state.green + action.payload > 255 || state.green + action.payload < 0)
+        return state;
+      return { ...state, green: state.green + action.payload };
+    case 'change_Blue':
+      if (state.blue + action.payload > 255 || state.blue + action.payload < 0)
+        return state;
+      return { ...state, blue: state.blue + action.payload };
+    default:
+      return state;
+  }
+};
+
 const SquareScreen = () => {
-  const [red, setRed] = useState(0);
-  const [green, setGreen] = useState(0);
-  const [blue, setBlue] = useState(0);
   const [color, setColor] = useState('rgb(255, 200, 0)');
-  const COLOR_INC_DEC = 10;
-
-  const getColor = () => {
-    return `rgb(${red}, ${green}, ${blue})`;
-  };
-
-  const setColorHandler = (color, change) => {
-    switch (color) {
-      case 'Red':
-        if (red + change > 255 || red + change < 0) return;
-        setRed((current) => current + change);
-        break;
-      case 'Green':
-        if (green + change > 255 || green + change < 0) return;
-        setGreen((current) => current + change);
-        break;
-      case 'Blue':
-        if (blue + change > 255 || blue + change < 0) return;
-        setBlue((current) => current + change);
-        break;
-      default:
-        break;
-    }
-  };
+  const [state, dispatch] = useReducer(reducer, { red: 0, green: 0, blue: 0 });
+  const { red, green, blue } = state;
 
   useEffect(() => {
-    setColor(`rgb(${red}, ${green}, ${blue})`);
     console.log(`rgb(${red}, ${green}, ${blue})`);
+    setColor(`rgb(${red}, ${green}, ${blue})`);
   }, [red, green, blue]);
 
   return (
@@ -43,17 +39,17 @@ const SquareScreen = () => {
       <ColorAdjuster
         color="Red"
         inc={COLOR_INC_DEC}
-        setColorHandler={setColorHandler}
+        setColorHandler={dispatch}
       />
       <ColorAdjuster
         color="Green"
         inc={COLOR_INC_DEC}
-        setColorHandler={setColorHandler}
+        setColorHandler={dispatch}
       />
       <ColorAdjuster
         color="Blue"
         inc={COLOR_INC_DEC}
-        setColorHandler={setColorHandler}
+        setColorHandler={dispatch}
       />
       <View
         style={{

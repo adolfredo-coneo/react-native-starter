@@ -7,11 +7,11 @@ const ColorAdjuster = ({ color, setColorHandler, inc }) => {
       <Text style={styles.text}>{color}</Text>
       <Button
         title={`More ${color}`}
-        onPress={() => setColorHandler(color, inc)}
+        onPress={() => setColorHandler({ type: `change_${color}`, payload: inc })}
       />
       <Button
         title={`Less ${color}`}
-        onPress={() => setColorHandler(color, inc * -1)}
+        onPress={() => setColorHandler({ type: `change_${color}`, payload: inc * -1 })}
       />
     </View>
   );
