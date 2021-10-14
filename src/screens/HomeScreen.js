@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native';
 
 const HomeScreen = ({ navigation: { navigate } }) => {
-  
   return (
     <View style={styles.view}>
       <Text style={styles.text}>HomeScreen Adol</Text>
@@ -10,30 +9,13 @@ const HomeScreen = ({ navigation: { navigate } }) => {
         title="Go to Components Demo"
         onPress={() => navigate('Components')}
       />
-      <Button
-        title="Go to List Demo"
-        onPress={() => navigate('List')}
-      />
-      <Button
-        title="Go to Image Demo"
-        onPress={() => navigate('Image')}
-      />
-      <Button
-        title="Go to Counter Demo"
-        onPress={() => navigate('Counter')}
-      />
-      <Button
-        title="Go to Color Demo"
-        onPress={() => navigate('Color')}
-      />
-      <Button
-        title="Go to Square Demo"
-        onPress={() => navigate('Square')}
-      />
-      <Button
-        title="Go to Text Demo"
-        onPress={() => navigate('Text')}
-      />
+      <Button title="Go to List Demo" onPress={() => navigate('List')} />
+      <Button title="Go to Image Demo" onPress={() => navigate('Image')} />
+      <Button title="Go to Counter Demo" onPress={() => navigate('Counter')} />
+      <Button title="Go to Color Demo" onPress={() => navigate('Color')} />
+      <Button title="Go to Square Demo" onPress={() => navigate('Square')} />
+      <Button title="Go to Text Demo" onPress={() => navigate('Text')} />
+      <Button title="Go to Box Demo" onPress={() => navigate('Box')} />
       <TouchableOpacity onPress={() => navigate('List')}>
         <Text>Go to List Demo</Text>
         <Text>Go to List Demo</Text>
@@ -46,11 +28,14 @@ const HomeScreen = ({ navigation: { navigate } }) => {
 const styles = StyleSheet.create({
   view: {
     justifyContent: 'center',
-    padding: 10
+    padding: 10,
   },
   text: {
     fontSize: 40,
     textAlign: 'center',
+  },
+  button: {
+    marginVertical: 10,
   },
 });
 
